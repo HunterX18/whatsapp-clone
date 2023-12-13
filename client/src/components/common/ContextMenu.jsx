@@ -40,7 +40,7 @@ function ContextMenu({ options, coordinates, contextMenu, setContextMenu }) {
 				{options.map((option) => {
 					return (
 						<li
-							className="px-5 py-2 cursor-pointer hover:bg-background-default-hover"
+							className="px-5 py-2 cursor-pointer hover:bg-background-default-hover text-white"
 							key={option.name}
 							onClick={(e) => handleClick(e, option.callback)}
 						>

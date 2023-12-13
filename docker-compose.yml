@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+  server:
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+    environment:
+      - DATABASE_URL="mysql://root:Smruti@mysql2000@192.168.0.182:3306/whatsapp"
+    ports:
+      - "5000:5000"
+    

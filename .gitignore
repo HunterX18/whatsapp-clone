@@ -15,6 +15,7 @@ server/yarn.lock
 
 server/uploads/
 # next.js
+client/next.config.js
 client/.next/
 /out/
 
@@ -32,7 +33,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env*.local
+server/.env
 
 # vercel
 .vercel
