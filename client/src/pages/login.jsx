@@ -61,12 +61,21 @@ function login() {
 				// localStorage.setItem("email", email);
 			}
 		} catch (err) {
-			console.log(err);
+			console.log("here", err);
 		}
+	};
+
+	const handleTest = async () => {
+		const res = await fetch("http://172.19.0.3:5000/test", {
+			method: "GET",
+		});
+		const data = await res.json(); 
+		console.log(data);
 	};
 
 	return (
 		<div className="flex justify-center items-center bg-panel-header-background h-screen w-screen flex-col gap-6">
+			<button onClick={handleTest}>Click here</button>
 			<div className="flex items-center justify-center gap-2 text-white">
 				<Image
 					src="/whatsapp.gif"

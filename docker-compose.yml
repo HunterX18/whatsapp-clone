@@ -1,20 +1,42 @@
-version: "3"
+version: "3.0"
 
 services:
-  client:
-    build:
-      dockerfile: Dockerfile
-      context: ./client
-    depends_on:
-      - server
+  #   client:
+  #     container_name: client-container
+  #     build:
+  #       dockerfile: Dockerfile
+  #       context: ./client
+  #     depends_on:
+  #       - server
+  #     networks:
+  #       - whatsapp_network
+  #     ports:
+  #       - "3000:3000"
+
+  db:
+    image: mysql:latest
+    container_name: db-container
+    environment:
+      MYSQL_DATABASE: whatsapp
+      MYSQL_ROOT_PASSWORD: root
+      healthcheck: "CMD mysqladmin ping -hlocalhost -uroot -proot"
+    networks:
+      - whatsapp_network
     ports:
-      - "3000:3000"
+      - "3306:3306"
+
   server:
+    container_name: server-container
     build:
       dockerfile: Dockerfile
       context: ./server
-    environment:
-      - DATABASE_URL="mysql://root:Smruti@mysql2000@192.168.0.182:3306/whatsapp"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - whatsapp_network
     ports:
       - "5000:5000"
-    
+
+networks:
+  whatsapp_network:

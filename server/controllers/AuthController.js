@@ -2,6 +2,7 @@ import getPrismaInstance from "../utils/PrismaClient.js";
 import { generateToken04 } from "../utils/TokenGenerator.js";
 
 export const checkUser = async (req, res, next) => {
+	console.log("login request received");
 	try {
 		const { email } = req.body;
 		if (!email) {

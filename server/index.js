@@ -17,13 +17,18 @@ app.use("/uploads/images", express.static("uploads/images"));
 app.use("/api/auth", AuthRoutes);
 app.use("/api/messages", MessageRoutes);
 
+app.get("/test", (req, res, next) => {
+	res.json({ msg: "test successful" });
+});
+
 const server = app.listen(5000, () => {
 	console.log(`server started on port 5000`);
 });
 
 const io = new Server(server, {
 	cors: {
-		origin: "http://localhost:3000",
+		// origin: "http://localhost:3000",
+		origin: "http://172.19.0.4:3000",
 	},
 });
 
