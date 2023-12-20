@@ -1,6 +1,8 @@
 # Use an official Node.js runtime as a base image
 FROM node:18-alpine
 
+RUN apk update && apk add bash && apk add --no-cache coreutils
+
 # Set the working directory inside the container
 WORKDIR /usr/src/app/server
 
@@ -13,11 +15,10 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-RUN npx prisma generate
-RUN npx prisma db push
+# Copy the wait-for-it.sh script into the container
+COPY wait-for-it.sh /usr/src/app/server/wait-for-it.sh
 
-# Expose the port the app runs on
-EXPOSE 5000
+# Make the script executable
+RUN chmod +x /usr/src/app/server/wait-for-it.sh
 
-# Command to run the application
-CMD ["npm", "start"]
+CMD ["/usr/src/app/server/wait-for-it.sh", "db:3306", "--", "sh", "-c", "npx prisma db push && npx prisma generate && npm start"]

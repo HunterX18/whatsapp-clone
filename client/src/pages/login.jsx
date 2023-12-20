@@ -21,22 +21,18 @@ function login() {
 		dispatch,
 	} = useStateProvider();
 
-	// redirect to chat page if you're already logged in instead of showing login page
-	// useEffect(() => {
-	// 	if (localStorage.getItem("email") !== null) {
-	// 		router.push("/");
-	// 	}
-	// }, []);
-
 	const handleLogin = async () => {
 		const provider = new GoogleAuthProvider();
 		const {
 			user: { displayName: name, email, photoURL },
 		} = await signInWithPopup(firebaseAuth, provider);
+		// const res = await signInWithPopup(firebaseAuth, provider);
+		// console.log(res.user.email);
 		try {
 			if (email) {
 				const { data } = await axios.post(CHECK_USER_ROUTE, { email });
 				if (!data.status) {
+					console.log("first time user");
 					dispatch({ type: reducerCases.SET_NEW_USER, newUser: true });
 					dispatch({
 						type: reducerCases.SET_USER_INFO,
@@ -44,6 +40,7 @@ function login() {
 					});
 					router.push("/onboarding");
 				} else {
+					console.log("old user");
 					const {
 						id,
 						name,
@@ -58,24 +55,22 @@ function login() {
 					});
 					router.push("/");
 				}
-				// localStorage.setItem("email", email);
 			}
 		} catch (err) {
 			console.log("here", err);
 		}
 	};
 
-	const handleTest = async () => {
-		const res = await fetch("http://172.19.0.3:5000/test", {
-			method: "GET",
-		});
-		const data = await res.json(); 
-		console.log(data);
-	};
+	// const handleTest = async () => {
+	// 	const res = await fetch("http://server:5000/test", {
+	// 		method: "GET",
+	// 	});
+	// 	const data = await res.json();
+	// 	console.log(data);
+	// };
 
 	return (
 		<div className="flex justify-center items-center bg-panel-header-background h-screen w-screen flex-col gap-6">
-			<button onClick={handleTest}>Click here</button>
 			<div className="flex items-center justify-center gap-2 text-white">
 				<Image
 					src="/whatsapp.gif"

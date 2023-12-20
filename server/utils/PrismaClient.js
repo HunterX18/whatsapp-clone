@@ -3,16 +3,20 @@ import { PrismaClient } from "@prisma/client";
 let prisma;
 
 function getPrismaInstance() {
-	if (process.env.NODE_ENV === "production") {
-		prisma = new PrismaClient();
-	} else {
-		if (!global.prisma) {
-			global.prisma = new PrismaClient();
-		}
+	try {
+		if (process.env.NODE_ENV === "production") {
+			prisma = new PrismaClient();
+		} else {
+			if (!global.prisma) {
+				global.prisma = new PrismaClient();
+			}
 
-		prisma = global.prisma;
+			prisma = global.prisma;
+		}
+		return prisma;
+	} catch (err) {
+		console.log(err);
 	}
-	return prisma;
 }
 
 export default getPrismaInstance;

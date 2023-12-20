@@ -70,7 +70,7 @@ function Main() {
 
 	useEffect(() => {
 		if (userInfo) {
-			console.log(userInfo);
+			// console.log(userInfo);
 			socket.current = io(HOST);
 			socket.current.emit("add-user", userInfo.id);
 			dispatch({ type: reducerCases.SET_SOCKET, socket });
@@ -114,7 +114,7 @@ function Main() {
 			socket.current.on("online-users", ({ onlineUsers }) => {
 				dispatch({
 					type: reducerCases.SET_ONLINE_USERS,
-					onlineUsers
+					onlineUsers,
 				});
 			});
 			setSocketEvent(true);
