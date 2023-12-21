@@ -24,7 +24,7 @@ pipeline {
       }
     }
 
-    stage('') {
+    stage('Client Build') {
       steps {
         sh 'docker build -f client/Dockerfile .'
       }
