@@ -17,7 +17,7 @@ pipeline {
 
         stage('Tests') {
           steps {
-            sh '''apt-get install -y nodejs
+            sh '''sudo apt-get install -y nodejs
 cd client && npm i && npm run test'''
           }
         }
