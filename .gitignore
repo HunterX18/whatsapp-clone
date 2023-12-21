@@ -33,10 +33,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-server/.env
+.env*
 
 # vercel
 .vercel
-
-#FirebaseConfig
-FirebaseConfig.js

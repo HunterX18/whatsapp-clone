@@ -8,6 +8,12 @@ services:
       context: ./client
     depends_on:
       - server
+    env_file:
+      - ./client/.env.local
+    volumes:
+      - /usr/src/app/client/node_modules
+      - /usr/src/app/client/.next
+      - ./client/src:/usr/src/app/client/src
     networks:
       - whatsapp_network
     ports:
@@ -31,6 +37,11 @@ services:
       context: ./server
     depends_on:
       - db
+    env_file:
+      - ./server/.env
+    volumes:
+      - /usr/src/app/server/node_modules
+      - ./server:/usr/src/app/server
     networks:
       - whatsapp_network
     ports:
