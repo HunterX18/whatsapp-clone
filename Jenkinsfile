@@ -24,12 +24,6 @@ pipeline {
       }
     }
 
-    stage('Client Build') {
-      steps {
-        sh 'docker build -f client/Dockerfile .'
-      }
-    }
-
   }
   tools {
     nodejs 'NodeJS 21.5.0'
