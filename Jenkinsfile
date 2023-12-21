@@ -17,9 +17,7 @@ pipeline {
 
         stage('Tests') {
           steps {
-            sh '''curl -sL https://deb.nodesource.com/setup_14.x | bash -
-apt-get install -y nodejs
-cd client && npm i && npm run test'''
+            sh 'cd client && npm i && npm run test'
           }
         }
 
