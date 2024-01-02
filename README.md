@@ -6,3 +6,5 @@ Points to remember
 2. only service name for the db works in the db connection url
 3. wait-for-it.sh to fully initialize the db container before requesting connection from the server container
 4. "npx prisma db push" to create tables and "npx prisma generate" to create the Prisma client
+
+Testing webhook for Jenkins
