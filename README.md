@@ -7,4 +7,4 @@ Points to remember
 3. wait-for-it.sh to fully initialize the db container before requesting connection from the server container
 4. "npx prisma db push" to create tables and "npx prisma generate" to create the Prisma client
 
-Testing webhook for Jenkins
+Testing webhook for Jenkins v2
